@@ -1,0 +1,55 @@
+version: '3.8'
+
+networks:
+  fsnet:
+    name: fsnet
+
+# The below must match the references from the movie_foo_sentiment.txt files
+services:
+  file-server:
+    container_name: nginx-file-server
+    image: nginx:alpine
+    networks:
+      - fsnet
+    volumes:
+      - ./generate/network-based/movie_foo_sentiment.txt:/usr/share/nginx/html/movie_foo.txt:ro
+
+  file-server-1:
+    container_name: nginx-file-server-1
+    image: nginx:alpine
+    networks:
+      - fsnet
+    volumes:
+      - ./generate/network-based/movie_foo_sentiment_2.txt:/usr/share/nginx/html/movie_foo.txt:ro
+
+  file-server-2:
+    container_name: nginx-file-server-2
+    image: nginx:alpine
+    networks:
+      - fsnet
+    volumes:
+      - ./generate/network-based/movie_foo_sentiment_3.txt:/usr/share/nginx/html/movie_foo.txt:ro
+
+  #debug:
+  #  container_name: debug
+  #  image: nicolaka/netshoot
+  #  command: ["sleep", "infinity"]
+  #  networks:
+  #    - fsnet
+
+  sentiment:
+    image: alpine:latest
+    volumes:
+      - ../bin/sentiment:/host/sentiment
+      - ./generate/validate.sh:/host/validate.sh
+      - ./generate/aggregate_sentiment.txt:/host/aggregate_sentiment.txt
+    entrypoint: 
+    - sh
+    - -c 
+    - /host/sentiment; echo "Found $(cat negative_sentiment_foo.txt | wc -l) negative sentiments in total."; sh /host/validate.sh
+    networks:
+      - fsnet
+    depends_on:
+      - file-server
+      - file-server-1
+      - file-server-2
