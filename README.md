@@ -88,6 +88,54 @@ make build
 make up
 ```
 
+# Example Output 
+
+```
+test-sentiment-1     | 2025/11/02 20:38:56 Movie Sentiment Analysis Starting
+test-sentiment-1     | 2025/11/02 20:38:56 Goroutine 0 is running
+test-sentiment-1     | 2025/11/02 20:38:56 Goroutine 0 processing endpoint: {foo http://nginx-file-server/movie_foo.txt}
+test-sentiment-1     | 2025/11/02 20:38:56 Warning: could not remove existing negative sentiment file negative_sentiment_foo.txt: remove negative_sentiment_foo.txt: no such file or directory
+test-sentiment-1     | 2025/11/02 20:38:56 Processing URL for movie foo: http://nginx-file-server/movie_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Requesting URL: http://nginx-file-server/movie_foo.txt
+nginx-file-server    | 172.18.0.5 - - [02/Nov/2025:20:38:56 +0000] "GET /movie_foo.txt HTTP/1.1" 200 4985 "-" "Go-http-client/1.1" "-"
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 1]: 1024
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 2]: 1024
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 3]: 1024
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 4]: 1024
+test-sentiment-1     | 2025/11/02 20:38:56 Persisting 25 negative reviews for movie foo to file negative_sentiment_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 5]: 889
+test-sentiment-1     | 2025/11/02 20:38:56 Cleaning up last partial line for movie foo: http://nginx-file-server-1/movie_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Discovered next URL for movie foo: http://nginx-file-server-1/movie_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Processing URL for movie foo: http://nginx-file-server-1/movie_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Requesting URL: http://nginx-file-server-1/movie_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 1]: 1024
+nginx-file-server-1  | 172.18.0.5 - - [02/Nov/2025:20:38:56 +0000] "GET /movie_foo.txt HTTP/1.1" 200 5257 "-" "Go-http-client/1.1" "-"
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 2]: 1024
+test-sentiment-1     | 2025/11/02 20:38:56 Persisting 20 negative reviews for movie foo to file negative_sentiment_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 3]: 1024
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 4]: 1024
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 5]: 1024
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 6]: 137
+test-sentiment-1     | 2025/11/02 20:38:56 Cleaning up last partial line for movie foo: http://nginx-file-server-2/movie_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Discovered next URL for movie foo: http://nginx-file-server-2/movie_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Processing URL for movie foo: http://nginx-file-server-2/movie_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Requesting URL: http://nginx-file-server-2/movie_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 1]: 1024
+nginx-file-server-2  | 172.18.0.5 - - [02/Nov/2025:20:38:56 +0000] "GET /movie_foo.txt HTTP/1.1" 200 5222 "-" "Go-http-client/1.1" "-"
+test-sentiment-1     | 2025/11/02 20:38:56 Persisting 21 negative reviews for movie foo to file negative_sentiment_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 2]: 1024
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 3]: 1024
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 4]: 1024
+test-sentiment-1     | 2025/11/02 20:38:56 Persisting 20 negative reviews for movie foo to file negative_sentiment_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 5]: 1024
+test-sentiment-1     | 2025/11/02 20:38:56 Read 1024 chunked bytes for movie foo [iter: 6]: 102
+test-sentiment-1     | 2025/11/02 20:38:56 Cleaning up last partial line for movie foo: Amiya Pagac: Outstanding.
+test-sentiment-1     | 2025/11/02 20:38:56 Persisting 12 negative reviews for movie foo to file negative_sentiment_foo.txt
+test-sentiment-1     | 2025/11/02 20:38:56 Goroutine 0 stopping
+test-sentiment-1     | Found 98 negative sentiments in total.
+test-sentiment-1     | Should be 98 negative phrases overall
+test-sentiment-1 exited with code 0
+```
 # NOTE
 
 Some stuff in here is hardcoded for convinience and I ack there are probably more "elegant" ways to do things as far as running/testing. Through I'm generally ok with the code, if anything looks especially off, please call it out.
