@@ -87,3 +87,7 @@ There is also some validation within the docker container running the gathering.
 make build 
 make up
 ```
+
+# NOTE
+
+Some stuff in here is hardcoded for convinience and I ack there are probably more "elegant" ways to do things as far as running/testing. Through I'm generally ok with the code, if anything looks especially off, please call it out.
